@@ -28,6 +28,18 @@ export default class CalculatorScreen extends React.Component {
         this.calc.addDigit(digit);
         this.setState({ display: this.calc.getMainDisplay() })
     }
+    onClearPress = () => {
+        this.calc.clear();
+        this.setState({ display: this.calc.getMainDisplay() })
+    }
+    onPlusMinusPress = () => {
+        this.calc.negate();
+        this.setState({ display: this.calc.getMainDisplay() })
+    } 
+    onBinaryOperatorPress = (operator) => {
+        this.calc.addBinaryOperator(operator);
+        this.setState({ display: this.calc.getMainDisplay() })
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -37,10 +49,10 @@ export default class CalculatorScreen extends React.Component {
                 
                 <View style={styles.buttonContainer}>
                     <View style={styles.buttonRow}>
-                        <CalcButton title="C" color="white" backgroundColor="#DCC894"/>
-                        <CalcButton title="+/-" color="white" backgroundColor="#DCC894"/>
+                        <CalcButton onPress={this.onClearPress} title="C" color="white" backgroundColor="#DCC894"/>
+                        <CalcButton onPress={this.onPlusMinusPress} title="+/-" color="white" backgroundColor="#DCC894"/>
                         <CalcButton title="%" color="white" backgroundColor="#DCC894"/>
-                        <CalcButton title="/" color="white" backgroundColor="#DCA394"/>
+                        <CalcButton onPress={() => { this.onBinaryOperatorPress(this.oc.DivisionOperator) }} title="/" color="white" backgroundColor="#DCA394"/>
                     </View>
                     <View style={styles.buttonRow}>
                         <CalcButton onPress={() => { this.onDigitPress("7")}} title="7" color="white" backgroundColor="#607D8B"/>
