@@ -18,23 +18,15 @@ export default class CalculatorScreen extends React.Component {
         this.state = {
             display: "0",
         };
-    var oc = global.swisscalc.lib.operatorCache;
-    var calc = new global.swisscalc.calc.calculator();
+    this.oc = global.swisscalc.lib.operatorCache;
+    this.calc = new global.swisscalc.calc.calculator();
 
-        // Calculate: 12 + 45 = 	
-    calc.addDigit("1");
-    calc.addDigit("2");
-    calc.addBinaryOperator(oc.AdditionOperator);
-    calc.addDigit("4");
-    calc.addDigit("5");
-    calc.equalsPressed();
-    console.log(calc.getMainDisplay());	// 57
-    calc.clear();
     }
 
     //
     onDigitPress = (digit) => {
-        
+        this.calc.addDigit(digit);
+        this.setState({ display: this.calc.getMainDisplay() })
     }
     render() {
         return (
@@ -51,26 +43,26 @@ export default class CalculatorScreen extends React.Component {
                         <CalcButton title="/" color="white" backgroundColor="#DCA394"/>
                     </View>
                     <View style={styles.buttonRow}>
-                        <CalcButton onPress={() => { this.onDigitPress("7")}}title="7" color="white" backgroundColor="#607D8B"/>
-                        <CalcButton title="8" color="white" backgroundColor="#607D8B"/>
-                        <CalcButton title="9" color="white" backgroundColor="#607D8B"/>
+                        <CalcButton onPress={() => { this.onDigitPress("7")}} title="7" color="white" backgroundColor="#607D8B"/>
+                        <CalcButton onPress={() => { this.onDigitPress("8")}} title="8" color="white" backgroundColor="#607D8B"/>
+                        <CalcButton onPress={() => { this.onDigitPress("9")}} title="9" color="white" backgroundColor="#607D8B"/>
                         <CalcButton title="x" color="white" backgroundColor="#DCA394"/>
                     </View>
                     <View style={styles.buttonRow}>
-                        <CalcButton title="4" color="white" backgroundColor="#607D8B"/>
-                        <CalcButton title="5" color="white" backgroundColor="#607D8B"/>
-                        <CalcButton title="6" color="white" backgroundColor="#607D8B"/>
-                        <CalcButton title="-" color="white" backgroundColor="#DCA394"/>
+                        <CalcButton onPress={() => { this.onDigitPress("4")}} title="4" color="white" backgroundColor="#607D8B"/>
+                        <CalcButton onPress={() => { this.onDigitPress("5")}} title="5" color="white" backgroundColor="#607D8B"/>
+                        <CalcButton onPress={() => { this.onDigitPress("6")}} title="6" color="white" backgroundColor="#607D8B"/>
+                        <CalcButton onPress={() => { this.onDigitPress("7")}} title="-" color="white" backgroundColor="#DCA394"/>
                     </View>
                     <View style={styles.buttonRow}>
-                        <CalcButton title="1" color="white" backgroundColor="#607D8B"/>
-                        <CalcButton title="2" color="white" backgroundColor="#607D8B"/>
-                        <CalcButton title="3" color="white" backgroundColor="#607D8B"/>
+                        <CalcButton onPress={() => { this.onDigitPress("1")}} title="1" color="white" backgroundColor="#607D8B"/>
+                        <CalcButton onPress={() => { this.onDigitPress("2")}} title="2" color="white" backgroundColor="#607D8B"/>
+                        <CalcButton onPress={() => { this.onDigitPress("3")}} title="3" color="white" backgroundColor="#607D8B"/>
                         <CalcButton title="+" color="white" backgroundColor="#DCA394"/>
                     </View>
                     <View style={styles.buttonRow}>
-                        <CalcButton title="0" color="white" backgroundColor="#607D8B" style={{flex: 2}}/>
-                        <CalcButton title="." color="white" backgroundColor="607D8B"/>
+                        <CalcButton onPress={() => { this.onDigitPress("0")}} title="0" color="white" backgroundColor="#607D8B" style={{flex: 2}}/>
+                        <CalcButton onPress={() => { this.onDigitPress(".")}} title="." color="white" backgroundColor="607D8B"/>
                         <CalcButton title="=" color="white" backgroundColor="#DCA394"/>
                     </View>
                 </View>
